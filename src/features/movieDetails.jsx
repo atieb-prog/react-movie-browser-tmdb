@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Badge, Spinner, Button } from "react-bootstrap";
 import { getMovieDetails, getMovieCredits } from "@services/movieServices";
@@ -35,6 +35,10 @@ const MovieDetails = () => {
     fetchData();
     
   }, [id]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [movie]);
 
   if (loading) {
     return (
