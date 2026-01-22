@@ -9,7 +9,7 @@ import {
   getTrendingMovies,
   searchMovies,
 } from "@services/movieServices.js";
-import MovieCard from "@components/MovieCard.jsx";
+import MovieCard from "@components/movieCard.jsx";
 
 const HomePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -23,6 +23,11 @@ const HomePage = () => {
   const currentPage = parseInt(searchParams.get("page")) || 1;
   const category = searchParams.get("category") || "popular";
   const searchQuery = searchParams.get("search") || "";
+
+  // Scroll to top when page changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage, category, searchQuery]);
 
   useEffect(() => {
     if (searchQuery.trim()) return;
@@ -128,7 +133,7 @@ const HomePage = () => {
                 </span>
                 <input
                   type="text"
-                  className="form-control border-0"
+                  className="form-control border-0 shadow-none"
                   placeholder="Search movies..."
                   value={searchQuery}
                   style={{ fontSize: "1.1rem" }}
@@ -149,7 +154,7 @@ const HomePage = () => {
           <div className="d-flex justify-content-center flex-wrap gap-2 mb-5">
             {[
               { key: "popular", label: "🔥 Popular", color: "danger" },
-              { key: "top_rated", label: "⭐ Top Rated", color: "warning" },
+              { key: "top_rated", label: "⭐ Top Rated", color: "secondary" },
               { key: "upcoming", label: "📅 Upcoming", color: "info" },
               { key: "now_playing", label: "🎬 Now Playing", color: "success" },
               { key: "trending", label: "📈 Trending", color: "primary" },
@@ -256,6 +261,7 @@ const HomePage = () => {
                   &lt;
                 </button>
 
+                
                 {Array.from({ length: 5 }, (_, i) => currentPage - 2 + i)
                   .filter((p) => p > 0 && p <= Math.min(totalPages, 500))
                   .map((p) => (

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Badge, Spinner, Button } from "react-bootstrap";
-import { getMovieDetails, getMovieCredits } from "../services/movieServices";
+import { getMovieDetails, getMovieCredits } from "@services/movieServices";
 
 const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
 const POSTER_BASE = "https://image.tmdb.org/t/p/w500";
@@ -33,6 +33,7 @@ const MovieDetails = () => {
     };
 
     fetchData();
+    
   }, [id]);
 
   if (loading) {

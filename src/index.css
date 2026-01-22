@@ -9,3 +9,217 @@ body {
 #root {
   min-height: 100vh;
 }
+
+/* Watchlist Dropdown Responsive Styles */
+
+/* Desktop: Dropdown aligned to header */
+@media (min-width: 992px) {
+  .watchlist-dropdown {
+    min-width: 350px;
+    max-width: 400px;
+    max-height: 400px;
+    overflow-y: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: fadeInDown 0.3s ease-in-out;
+  }
+}
+
+/* Mobile: Full-width dropdown/bottom sheet style */
+@media (max-width: 991.98px) {
+  .watchlist-dropdown {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    transform: none !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: 70vh;
+    border-radius: 16px 16px 0 0 !important;
+    border: none !important;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease-out;
+    overflow-y: auto;
+    z-index: 1050;
+  }
+
+  /* Backdrop overlay for mobile - shown when dropdown is open */
+  .dropdown.show::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1040;
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  /* Mobile: Add a handle/indicator at the top */
+  .watchlist-dropdown::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    margin: 8px auto 12px;
+  }
+}
+
+/* Watchlist Button Visual Feedback */
+#watchlistDropdown {
+  position: relative;
+  transition: all 0.3s ease;
+  border: none;
+  background: transparent;
+}
+
+#watchlistDropdown:hover {
+  transform: translateY(-2px);
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+}
+
+#watchlistDropdown:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
+}
+
+#watchlistDropdown.show {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+
+/* Badge Animation */
+#watchlistDropdown .badge {
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+#watchlistDropdown:hover .badge {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(220, 53, 69, 0.6);
+}
+
+#watchlistDropdown:active .badge {
+  transform: scale(0.9);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Dropdown Items Visual Feedback */
+.watchlist-dropdown li {
+  transition: all 0.2s ease;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.watchlist-dropdown li:hover {
+  background: rgba(0, 0, 0, 0.05);
+  transform: translateX(4px);
+}
+
+.watchlist-dropdown li:active {
+  transform: scale(0.98);
+}
+
+/* Movie Link Hover */
+.watchlist-dropdown a {
+  transition: color 0.2s ease;
+}
+
+.watchlist-dropdown a:hover {
+  color: #0d6efd !important;
+}
+
+/* Remove Button Visual Feedback */
+.watchlist-dropdown .btn-outline-danger {
+  transition: all 0.2s ease;
+}
+
+.watchlist-dropdown .btn-outline-danger:hover {
+  transform: rotate(90deg) scale(1.1);
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.4);
+}
+
+.watchlist-dropdown .btn-outline-danger:active {
+  transform: rotate(90deg) scale(0.9);
+  background-color: #dc3545;
+}
+
+/* Poster Image Hover */
+.watchlist-dropdown img {
+  transition: all 0.3s ease;
+}
+
+.watchlist-dropdown li:hover img {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Smooth scrolling for dropdown */
+.watchlist-dropdown {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for dropdown */
+.watchlist-dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.watchlist-dropdown::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.watchlist-dropdown::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.watchlist-dropdown::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
