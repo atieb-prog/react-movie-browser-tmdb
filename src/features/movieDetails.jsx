@@ -2,6 +2,7 @@ import { useState, useEffect, use } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Badge, Spinner, Button } from "react-bootstrap";
 import { getMovieDetails, getMovieCredits } from "@services/movieServices";
+import { useWatchlist } from "@context/watchlistContext.jsx";
 
 const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
 const POSTER_BASE = "https://image.tmdb.org/t/p/w500";
@@ -13,6 +14,8 @@ const MovieDetails = () => {
   const [credits, setCredits] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { addToWatchlist, removeFromWatchlist ,isInWatchlist} = useWatchlist();
+  const InWatchlist = isInWatchlist(movie?.id);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -139,6 +142,20 @@ const MovieDetails = () => {
                 <p className="mb-0 text-success">
                   {movie.revenue ? `$${movie.revenue.toLocaleString()}` : "—"}
                 </p>
+              </div>
+              <div className="mb-3">
+                <small className="text-secondary d-block mb-1">Add to Watchlist</small>
+                <Button
+                  variant={InWatchlist ? "danger" : "primary"}
+                  onClick={() => {
+                    InWatchlist
+                      ? removeFromWatchlist(movie.id)
+                      : addToWatchlist(movie)
+                  } 
+                  }
+                >
+                  {InWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}
+                </Button>
               </div>
               <div>
                 <small className="text-secondary d-block mb-1">STATUS</small>
