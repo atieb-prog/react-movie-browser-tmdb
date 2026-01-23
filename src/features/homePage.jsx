@@ -224,7 +224,7 @@ const HomePage = () => {
             {filteredMovies.map((movie) => (
               <Col
                 key={movie.id}
-                xs={12}
+                xs={6}
                 sm={4}
                 md={3}
                 lg={3}
