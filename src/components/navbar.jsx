@@ -9,7 +9,12 @@ function Navbar() {
   const IMAGE_BASE = "https://image.tmdb.org/t/p/w185";
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+    <nav 
+      className="navbar navbar-expand-lg navbar-dark"
+      style={{
+        backgroundColor: "#0f0f0f",
+      }}
+    >
       <div className="container">
         <Link className="navbar-brand fw-bold" to="/">
           MovieApp
